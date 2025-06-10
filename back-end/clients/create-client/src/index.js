@@ -17,6 +17,18 @@ app.get('/', (req, res) => {
   res.send('✅ Create Client Service is running!');
 });
 
+//test de error
+//app.get('/error-test', (req, res, next) => {
+  //const error = new Error('💥 This is a test error');
+  //error.status = 418; // Código divertido: “I’m a teapot” (opcional)
+  //next(error);
+//});
+
+
+// 🛑 Manejo global de errores (debe ir después de TODAS las rutas)
+const errorHandler = require('./middlewares/errorHandler');
+app.use(errorHandler);
+
 app.listen(PORT, () => {
   console.log(`🚀 Server is listening on port ${PORT}`);
 });
