@@ -1,0 +1,11 @@
+**/.env
+# Ignorar archivos de entorno
+**/.env
+
+# Dependencias
+node_modules/
+dist/
+
+# Logs y otros
+*.log
+.env.local
