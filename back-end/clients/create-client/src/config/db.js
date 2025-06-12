@@ -1,5 +1,10 @@
 const { Pool } = require('pg');
-require('dotenv').config();
+const path = require('path');
+const dotenv = require('dotenv');
+
+// 🔍 Carga el .env.test si está en modo test
+const envFile = process.env.NODE_ENV === 'test' ? '.env.test' : '.env';
+dotenv.config({ path: path.resolve(__dirname, `../../${envFile}`) });
 
 const pool = new Pool({
   host: process.env.PG_HOST,
