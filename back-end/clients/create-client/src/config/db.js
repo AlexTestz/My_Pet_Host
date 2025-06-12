@@ -1,13 +1,11 @@
 const { Pool } = require('pg');
 
-// ✅ Solo carga .env local si estás en desarrollo
-if (process.env.NODE_ENV !== 'ci' && process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'ci') {
   const path = require('path');
   const dotenv = require('dotenv');
   dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 }
 
-// 🔐 Pool usando variables de entorno (ya sea desde .env o GitHub Actions)
 const pool = new Pool({
   host: process.env.PG_HOST,
   port: process.env.PG_PORT,
