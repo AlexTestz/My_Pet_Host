@@ -15,7 +15,7 @@ jobs:
         working-directory: back-end/clients/create-client
 
     steps:
-      - name: 🧾 Checkout repository
+      - name:  Checkout repository
         uses: actions/checkout@v3
 
       - name: 🔧 Set up Node.js
@@ -23,8 +23,8 @@ jobs:
         with:
           node-version: 18
 
-      - name: 📦 Install dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: 🧪 Run tests
+      - name:  Run tests
         run: npm test
