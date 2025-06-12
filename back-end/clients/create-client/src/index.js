@@ -1,9 +1,6 @@
-// src/index.js
-
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(express.json());
@@ -17,18 +14,17 @@ app.get('/', (req, res) => {
   res.send('✅ Create Client Service is running!');
 });
 
-//test de error
-//app.get('/error-test', (req, res, next) => {
-  //const error = new Error('💥 This is a test error');
-  //error.status = 418; // Código divertido: “I’m a teapot” (opcional)
-  //next(error);
-//});
-
-
-// 🛑 Manejo global de errores (debe ir después de TODAS las rutas)
+// Manejo global de errores
 const errorHandler = require('./middlewares/errorHandler');
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server is listening on port ${PORT}`);
-});
+// Solo escuchar si este archivo es el principal
+if (require.main === module) {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server is listening on port ${PORT}`);
+  });
+}
+
+// Exportar para pruebas
+module.exports = app;
