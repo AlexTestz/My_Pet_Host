@@ -46,7 +46,7 @@ jobs:
           DB_HOST: localhost
           DB_PORT: 5432
           DB_USER: postgres
-          DB_PASSWORD: postgres
+          DB_PASSWORD: admin
           DB_NAME: clients_db
         run: npx jest
 
