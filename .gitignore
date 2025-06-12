@@ -1,6 +1,7 @@
 **/.env
 # Ignorar archivos de entorno
 **/.env
+**/.env.test
 
 # Dependencias
 node_modules/

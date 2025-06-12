@@ -16,18 +16,18 @@ jobs:
 
     services:
       postgres:
-        image: postgres:15
+        image: postgres:16
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: clients_db
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: pet_care_clients_db
         ports:
           - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
-          --health-retries 5
+          --health-retries 10
 
     steps:
       - name: 🧾 Checkout repository
@@ -41,12 +41,21 @@ jobs:
       - name: 📦 Install dependencies (with dev)
         run: npm install --include=dev
 
+      - name: 🕓 Wait for PostgreSQL to be ready
+        run: |
+          for i in {1..15}; do
+            pg_isready -h localhost -p 5432 && echo "Postgres is ready!" && exit 0
+            echo "Waiting for postgres... ($i)"
+            sleep 2
+          done
+          echo "Postgres did not become ready in time!" && exit 1
+
       - name: 🧪 Run tests
         env:
-          DB_HOST: localhost
-          DB_PORT: 5432
-          DB_USER: postgres
-          DB_PASSWORD: admin
-          DB_NAME: clients_db
-        run: npx jest
-
+          NODE_ENV: ci
+          PG_HOST: 127.0.0.1
+          PG_PORT: 5432
+          PG_USER: postgres
+          PG_PASSWORD: admin
+          PG_DATABASE: pet_care_clients_db
+        run: npx jest --detectOpenHandles
