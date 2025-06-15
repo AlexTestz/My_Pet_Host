@@ -4,7 +4,7 @@ from src.routers import pets_routes
 
 app = FastAPI(
     title="Delete Pet Microservice",
-    description="Microservice to delete pets from the system",
+    description="Microservice to delete pet records",
     version="1.0.0"
 )
 
@@ -21,3 +21,4 @@ app.include_router(pets_routes.router)
 @app.get("/")
 def root():
     return {"message": "✅ Delete Pet Service is running!"}
+# This is the main entry point for the Delete Pet microservice.
