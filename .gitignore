@@ -1,12 +1,52 @@
+# ─────────────────────────────────────
+# 🔒 Archivos sensibles / configuración
+# ─────────────────────────────────────
 **/.env
-# Ignorar archivos de entorno
-**/.env
-**/.env.test
+**/.env.*
+.env
+.env.*
+.env.local
+.env.test
 
-# Dependencias
+# ─────────────────────────────────────
+# 📦 Node.js
+# ─────────────────────────────────────
 node_modules/
 dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
 
-# Logs y otros
-*.log
-.env.local
+# ─────────────────────────────────────
+# 🐍 Python / FastAPI
+# ─────────────────────────────────────
+**/__pycache__/
+**/*.py[cod]
+**/*.pyo
+*.sqlite3
+.venv/
+venv/
+env/
+ENV/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ─────────────────────────────────────
+# ⚙️ IDEs / Sistemas operativos
+# ─────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# ─────────────────────────────────────
+# 🧪 Test / Coverage
+# ─────────────────────────────────────
+.coverage
+coverage/
+htmlcov/
+.pytest_cache/
+jest-coverage/
+.nyc_output/
