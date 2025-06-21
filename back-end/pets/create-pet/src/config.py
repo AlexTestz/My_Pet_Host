@@ -17,6 +17,9 @@ class Settings:
     DB_NAME: str = os.getenv("DB_NAME")
     DB_USER: str = os.getenv("DB_USER")
     DB_PASSWORD: str = os.getenv("DB_PASSWORD")
+    
+    # Puerto del microservicio
 
+    PORT: int = int(os.getenv("PORT", 8000))  # usa 8000 si no está definido
 
 settings = Settings()

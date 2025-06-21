@@ -25,3 +25,4 @@ app.include_router(pets_routes.router)
 @app.get("/")
 def health_check():
     return {"message": "✅ Create Pet Service is running!"}
+
