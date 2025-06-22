@@ -6,7 +6,7 @@ from src.controllers.users_controller import create_user_in_db
 
 router = APIRouter(prefix="/api/users", tags=["Users"])
 
-@router.post("/", summary="Register a new user")
+@router.post("/register", summary="Register a new user")
 def register_user(user: UserCreate):
     new_user = create_user_in_db(user)
     return {
