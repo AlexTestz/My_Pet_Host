@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src.routes.users_routes import router
+from src.routes.clients_routes import router as clients_router
+
 
 app = FastAPI(title="API Gateway")
 
@@ -13,6 +15,8 @@ app.add_middleware(
 )
 
 app.include_router(router)
+app.include_router(clients_router)
+
 
 @app.get("/")
 def root():
