@@ -8,7 +8,7 @@ def create_pet_in_db(pet: PetCreate):
     try:
         # 🔍 Validar si el cliente existe haciendo una solicitud al microservicio de clientes
         try:
-            response = requests.get(f"http://localhost:3001/api/clients/{pet.client_id}")
+            response = requests.get(f"http://localhost:3002/api/clients/{pet.client_id}")
             if response.status_code == 404:
                 raise HTTPException(status_code=404, detail="Client not found")
             elif not response.ok:
