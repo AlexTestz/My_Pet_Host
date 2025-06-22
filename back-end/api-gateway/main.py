@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src.routes.users_routes import router
 from src.routes.clients_routes import router as clients_router
+from src.routes import pets_routes
 
 
 app = FastAPI(title="API Gateway")
@@ -16,6 +17,8 @@ app.add_middleware(
 
 app.include_router(router)
 app.include_router(clients_router)
+app.include_router(pets_routes.router)
+
 
 
 @app.get("/")
