@@ -43,7 +43,19 @@ export default function Dashboard() {
         >
           Registrar mascota
         </button>
+          <button
+          onClick={() => navigate("/clients")}
+          className="bg-purple-600 text-white w-full py-2 rounded hover:bg-purple-700 transition"
+        >
+          Ver clientes
+        </button>
 
+        <button
+          onClick={() => navigate("/pets")}
+          className="bg-yellow-600 text-white w-full py-2 rounded hover:bg-yellow-700 transition"
+        >
+          Ver mascotas
+        </button>
         <button
           onClick={logout}
           className="bg-red-500 text-white w-full py-2 rounded hover:bg-red-600 transition"
