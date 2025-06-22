@@ -19,10 +19,14 @@ def login_user(credentials: LoginRequest):
         user = cur.fetchone()
 
         if user is None:
-            raise HTTPException(status_code=404, detail="User not found")
+            raise HTTPException(status_code=404, detail="Usuario no encontrado")
 
         if not bcrypt.checkpw(credentials.password.encode('utf-8'), user["password"].encode('utf-8')):
-            raise HTTPException(status_code=401, detail="Incorrect password")
+            raise HTTPException(status_code=401, detail="Contraseña incorrecta")
+
+        # 👇🔐 Validación del rol: solo puede iniciar sesión un admin
+        if user["role"] != "admin":
+            raise HTTPException(status_code=403, detail="No tienes permiso para iniciar sesión")
 
         token_data = {
             "sub": str(user["id"]),
@@ -39,4 +43,5 @@ def login_user(credentials: LoginRequest):
         raise
     except Exception as e:
         print("❌ Login error:", e)
-        raise HTTPException(status_code=500, detail="Internal server error during login")
+        raise HTTPException(status_code=500, detail="Error interno en el servidor durante el login")
+
