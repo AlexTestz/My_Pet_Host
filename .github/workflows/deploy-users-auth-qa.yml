@@ -13,7 +13,7 @@ jobs:
       - name: Desplegar a EC2 via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: 52.86.155.10
+          host: 3.223.253.161
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
