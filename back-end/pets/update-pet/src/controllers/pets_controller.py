@@ -19,7 +19,7 @@ def update_pet_in_db(pet_id: int, pet_data: PetUpdate):
          #  Validar client_id (si viene)
         if pet_data.client_id is not None:
             try:
-                response = requests.get(f"http://localhost:3001/api/clients/{pet_data.client_id}")
+                response = requests.get(f"http://localhost:3002/api/clients/{pet_data.client_id}")
                 if response.status_code == 404:
                     raise HTTPException(status_code=404, detail="Client not found")
                 elif not response.ok:

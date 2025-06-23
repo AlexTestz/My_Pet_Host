@@ -1,13 +1,8 @@
-# src/routes/users_routes.py
-
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Request
 import httpx
 from src.config.config import get_env
-from src.schemas.user_schema import ChangePasswordRequest
-from src.controllers.users_controller import change_password
-from src.dependencies import get_current_user  # ⚠️ Este archivo se muestra abajo
 
-router = APIRouter(prefix="/api/users", tags=["Users"])
+router = APIRouter(prefix="/api/users")
 
 @router.post("/register")
 async def register_user(req: Request):
@@ -35,8 +30,10 @@ async def validate_token(req: Request):
         return response.json()
 
 @router.put("/change-password")
-def change_password_route(
-    data: ChangePasswordRequest,
-    user=Depends(get_current_user)
-):
-    return change_password(user["id"], data)
+async def change_password(req: Request):
+    async with httpx.AsyncClient() as client:
+        body = await req.json()
+        token = req.headers.get("Authorization")
+        headers = {"Authorization": token} if token else {}
+        response = await client.put(f"{get_env('CHANGE_PASSWORD_URL')}/api/users/change-password", json=body, headers=headers)
+        return response.json()
