@@ -17,11 +17,12 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/users-auth
-            sudo docker-compose pull
-            sudo docker-compose down
-             sudo docker container prune -f       # 🔴 Limpia contenedores detenidos
-             sudo docker network prune -f         # 🔵 Limpia redes antiguas
-               sudo docker-compose pull
+            script: |
+              cd ~/users-auth
+              sudo docker-compose down
+              sudo docker container prune -f
+              sudo docker network prune -f
+              sudo docker rm -f $(sudo docker ps -aq) || true   # 🔥 Mata todos los contenedores en ejecución
+              sudo docker-compose pull
+              sudo docker-compose up -d
 
-            sudo docker-compose up -d
