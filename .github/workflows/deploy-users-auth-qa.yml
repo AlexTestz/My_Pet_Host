@@ -1,0 +1,28 @@
+name: Deploy QA for Users Auth
+
+on:
+  push:
+    branches:
+      - QA
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Pull QA Docker images
+        run: |
+          docker pull alexmpz/register-user-service:qa
+          docker pull alexmpz/login-user-service:qa
+          docker pull alexmpz/validate-token-service:qa
+          docker pull alexmpz/change-password-service:qa
+
+      - name: Run Docker Compose
+        run: |
+          docker-compose -f back-end/users-auth/docker-compose.yml up -d
+
+      - name: Verify containers
+        run: docker ps
