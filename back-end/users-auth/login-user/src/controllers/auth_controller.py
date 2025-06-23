@@ -1,4 +1,4 @@
-# src/controllers/auth_controller.py.
+# src/controllers/auth_controller.py.aasd
 
 from fastapi import HTTPException
 from src.database.database import get_connection
