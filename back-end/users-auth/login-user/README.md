@@ -1,4 +1,4 @@
-#  Login User Microservice – Domain: users-auth
+#  Login User Microservice – Domain: users-auth.
 
 Este microservicio se encarga de la autenticación de usuarios, validando credenciales y generando tokens JWT para sesiones seguras.
 
