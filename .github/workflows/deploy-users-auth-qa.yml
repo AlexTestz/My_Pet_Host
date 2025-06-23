@@ -3,7 +3,7 @@ name: Deploy Users Auth QA
 on:
   push:
     branches:
-      - qa
+      - QA
 
 jobs:
   deploy:
