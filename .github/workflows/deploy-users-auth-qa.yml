@@ -1,24 +1,23 @@
-name: Deploy users-auth QA
+name: Deploy Users Auth QA
 
 on:
   push:
     branches:
-      - QA
+      - qa
 
 jobs:
   deploy:
-    name: Deploy to EC2 QA
     runs-on: ubuntu-latest
 
     steps:
-      - name: Connect and Deploy to EC2
+      - name: Desplegar a EC2 via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.EC2_HOST }}
+          host: 52.86.155.10
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd ~/users-auth
-            sudo docker compose pull
-            sudo docker compose down
-            sudo docker compose up -d
+            sudo docker-compose pull
+            sudo docker-compose down
+            sudo docker-compose up -d
