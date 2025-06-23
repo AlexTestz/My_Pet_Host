@@ -49,6 +49,12 @@ export default function Dashboard() {
         >
           Ver clientes
         </button>
+                <button
+          onClick={() => navigate("/change-password")}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Cambiar Contraseña
+        </button>
 
         <button
           onClick={() => navigate("/pets")}
