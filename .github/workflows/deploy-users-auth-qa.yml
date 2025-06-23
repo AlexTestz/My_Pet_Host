@@ -1,4 +1,4 @@
-name: Deploy QA for Users Auth
+name: Deploy users-auth QA
 
 on:
   push:
@@ -7,23 +7,18 @@ on:
 
 jobs:
   deploy:
+    name: Deploy to EC2 QA
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Pull QA Docker images
-        run: |
-          docker pull alexmpz/register-user-service:qa
-          docker pull alexmpz/login-user-service:qa
-          docker pull alexmpz/validate-token-service:qa
-          docker pull alexmpz/change-password-service:qa
-
-      - name: Run Docker Compose
-        run: |
-          docker compose -f back-end/users-auth/docker-compose.yml up -d
-
-
-      - name: Verify containers
-        run: docker ps
+      - name: Connect and Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/users-auth
+            sudo docker compose pull
+            sudo docker compose down
+            sudo docker compose up -d
