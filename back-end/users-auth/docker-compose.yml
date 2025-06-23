@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  register-user:
+    image: alexmpz/register-user-service:qa
+    container_name: register-user-service
+    ports:
+      - "3006:3006"
+    env_file:
+      - ./register-user/.env
+
+  login-user:
+    image: alexmpz/login-user-service:qa
+    container_name: login-user-service
+    ports:
+      - "3007:3007"
+    env_file:
+      - ./login-user/.env
+
+  validate-token:
+    image: alexmpz/validate-token-service:qa
+    container_name: validate-token-service
+    ports:
+      - "3008:3008"
+    env_file:
+      - ./validate-token/.env
+
+  change-password:
+    image: alexmpz/change-password-service:qa
+    container_name: change-password-service
+    ports:
+      - "3009:3009"
+    env_file:
+      - ./change-password/.env
