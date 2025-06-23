@@ -9,6 +9,7 @@ import ClientListPage from "../pages/ClientListPage";
 import PetListPage from "../pages/PetListPage";
 import EditPetPage from "../pages/EditPetPage";
 import EditClientPage from "../pages/EditClientPage";
+import ChangePasswordPage from "../pages/ChangePasswordPage";
 
 
 
@@ -24,6 +25,8 @@ export default function AppRouter() {
         <Route path="/pets" element={<PetListPage />} />
         <Route path="/edit-pet/:id" element={<EditPetPage />} />
         <Route path="/edit-client/:id" element={<EditClientPage />} />
+        <Route path="/change-password" element={<ChangePasswordPage />} />
+
 
         <Route
           path="/dashboard"

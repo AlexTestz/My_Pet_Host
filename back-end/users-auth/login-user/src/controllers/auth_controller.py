@@ -1,3 +1,5 @@
+# src/controllers/auth_controller.py
+
 from fastapi import HTTPException
 from src.database.database import get_connection
 from src.schemas.auth_schema import LoginRequest
@@ -24,7 +26,6 @@ def login_user(credentials: LoginRequest):
         if not bcrypt.checkpw(credentials.password.encode('utf-8'), user["password"].encode('utf-8')):
             raise HTTPException(status_code=401, detail="Contraseña incorrecta")
 
-        # 👇🔐 Validación del rol: solo puede iniciar sesión un admin
         if user["role"] != "admin":
             raise HTTPException(status_code=403, detail="No tienes permiso para iniciar sesión")
 
@@ -37,11 +38,15 @@ def login_user(credentials: LoginRequest):
 
         access_token = create_access_token(token_data)
 
-        return {"access_token": access_token, "token_type": "bearer"}
+        # ✅ Retornamos también el user_id
+        return {
+            "access_token": access_token,
+            "token_type": "bearer",
+            "user_id": user["id"]
+        }
 
     except HTTPException:
         raise
     except Exception as e:
         print("❌ Login error:", e)
         raise HTTPException(status_code=500, detail="Error interno en el servidor durante el login")
-
